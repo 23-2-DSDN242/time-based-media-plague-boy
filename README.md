@@ -1,7 +1,5 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/H1UMq2qW)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=14236849&assignment_repo_type=AssignmentRepo)
+
 ## MDDN 242 Project 1: Time-based Media  
 
-### THIS IS YOUR README
-
-Update this file as you go along to record your progress.
+10/02/2024
+My idea is inspired by the flight boards seen in airports, I plan on having a middle strip in the desig with an aeroplane traveling with the hours, flying from sunrise to sunset with an ombre that changes with the hour, and the plane traveling from hours 1-12, with an alarm at hour 6, 12, and 18.
