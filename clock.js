@@ -30,16 +30,40 @@ function draw_clock(obj) {
     // rect(0,0,960,500)
 let myStrokeWeight = 50;
 strokeWeight(myStrokeWeight);
-for(let i=1; i<width; i = i + myStrokeWeight+1){
-  let lerpMAP = map(i, 0, width, 0, obj.seconds/59*5);
-  let sunriselerp = lerpColor(risesky,daysky,lerpMAP)
-  stroke(sunriselerp)
-  line(i,0,i,height);
-  i/50
+if (obj.hours < 18  ){
+  if (obj.hours < 6.25){ // Nightsky - Sunrise
+    for(let i=0; i<width; i = i += myStrokeWeight){
+      let lerpMAP = map(i, 0, width, 0, obj.minutes/59*5);
+      let sunriselerp = lerpColor(risesky,daysky,lerpMAP)
+      stroke(sunriselerp)
+      line(i,0,i,height);
+    }
+  } else{
+    
+      for(let i=0; i<width; i = i += myStrokeWeight){
+        if(obj.hours < 6.75){ // Sunrise - Daysky
+        let lerpMAP = map(i, 0, width, 0, obj.minutes/59*5);
+        let sunriselerp = lerpColor(risesky,daysky,lerpMAP)
+        stroke(sunriselerp)
+        line(i,0,i,height);
+      
+    } else{ //Daysky
+        stroke(daysky)
+        line(i,0,i,height);
+      
+    }
+  }
+  } 
+  } else{
+    text('HELLO',100,100)
+  }
 
-}
-
-
+  // for(let i=0; i<width; i = i += myStrokeWeight){
+  //   let lerpMAP = map(i, 0, width, 0, obj.seconds/59*5);
+  //   let sunriselerp = lerpColor(risesky,daysky,lerpMAP)
+  //   stroke(sunriselerp)
+  //   line(i,0,i,height);
+  // }
 
 //clocks
 let clockx = 40; //X cord for the clock
@@ -52,20 +76,32 @@ let clockcurve = 20; //Curve of the clock
   fill(0);
   rect(clockx,clocky,clockw,clockh,clockcurve);
   rect(clockx + 95,clocky,clockw,clockh,clockcurve);
-  stroke(10);
-  textSize(40);
+  strokeWeight(1)
+  textSize(70);
+  fill(255)
   textAlign(CENTER, CENTER);
-  text(obj.hours);
+  text(obj.hours, clockx+43, clocky+53);
 
 //Minute
-  noStroke()
+  noStroke();
+  fill(0);
   rect(clockx + 348,clocky,clockw,clockh,clockcurve);
   rect(clockx + 443,clocky,clockw,clockh,clockcurve);
+  strokeWeight(1)
+  textSize(70);
+  fill(255)
+  textAlign(CENTER, CENTER);
+  text(obj.minutes, clockx+393, clocky+53);
 
-//Second
+//Seconds
+  noStroke()
+  fill(0);
   rect(clockx + 691,clocky,clockw,clockh,clockcurve);
   rect(clockx + 786,clocky,clockw,clockh,clockcurve);
-
-
-
+  strokeWeight(1)
+  textSize(70);
+  fill(255)
+  textAlign(CENTER, CENTER);
+  text(obj.seconds, clockx+783, clocky+53);
 }
+
