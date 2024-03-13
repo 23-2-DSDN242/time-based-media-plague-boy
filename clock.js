@@ -20,44 +20,60 @@ function draw_clock(obj) {
   
 
 //sky
-    // Twilight runs from 6:00 to 6:15
-    // Sunrise runs from 6:15 to 7:00
-    // Daylight runs from 7:00 to 18:00
-    // Sunset runs from 18:00 to 18:45
-    // Set to Night runs from 18:45 to 19:00
-    // Night runs from 19:00 to 6:00
-    // fill(sunriselerp)
-    // rect(0,0,960,500)
-let myStrokeWeight = 50;
-strokeWeight(myStrokeWeight);
-if (obj.hours < 18  ){
-  if (obj.hours < 6.25){ // Nightsky - Sunrise
-    for(let i=0; i<width; i = i += myStrokeWeight){
-      let lerpMAP = map(i, 0, width, 0, obj.minutes/59*5);
-      let sunriselerp = lerpColor(risesky,daysky,lerpMAP)
-      stroke(sunriselerp)
-      line(i,0,i,height);
-    }
-  } else{
-    
-      for(let i=0; i<width; i = i += myStrokeWeight){
-        if(obj.hours < 6.75){ // Sunrise - Daysky
-        let lerpMAP = map(i, 0, width, 0, obj.minutes/59*5);
-        let sunriselerp = lerpColor(risesky,daysky,lerpMAP)
-        stroke(sunriselerp)
-        line(i,0,i,height);
-      
-    } else{ //Daysky
-        stroke(daysky)
-        line(i,0,i,height);
-      
-    }
-  }
-  } 
-  } else{
-    text('HELLO',100,100)
-  }
+// let myStrokeWeight = 50;
+// strokeWeight(myStrokeWeight);
+// if (obj.hours < 18 && obj.minutes<30){
+//   if (obj.hours < 6){ //Nightsky
+//     fill(nightsky);
+//       rect(0,0,960,500);
+//   } else {
+//   if (obj.hours < 6 && obj.minutes<15){ // Nightsky - Sunrise
+//     for(let i=0; i<width; i = i += myStrokeWeight){
+//       let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+//       let twilightlerp = lerpColor(nightky,risesky,lerpMAP)
+//       stroke(twilightlerp)
+//       line(i,0,i,height);
+//     }
+//   } else{
+//     if(obj.hours < 6 && obj.minutes<45){ // Sunrise - Daysky
+//       for(let i=0; i<width; i = i += myStrokeWeight){
+//           let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+//           let sunriselerp = lerpColor(risesky,daysky,lerpMAP);
+//           stroke(sunriselerp);
+//           line(i,0,i,height);
+//       } 
+//   } else{//Daysky
+//     fill(daysky);
+//     rect(0,0,960,500);
+//     }
+//   } 
+//   }
+// } else{
+//     if(obj.hours > 17){
+//   if(obj.hours < 19){ // Daysky-Sunset
+//     for(let i=0; i<width; i = i += myStrokeWeight){
+//       let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+//       let sundownlerp = lerpColor(daysky,setsky,lerpMAP);
+//       stroke(sundownlerp);
+//       line(i,0,i,height);
+//       }
+//     } else {
+//       if(obj.hours < 19 && obj.minutes < 30){; //Sunset-Nightsky
+//         let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+//         let sunsetlerp = lerpColor(setsky,nightsky,lerpMAP);
+//         stroke(sunsetlerp);
+//         line(i,0,i,height);
 
+//       } else { //Night Time
+//         fill(nightsky);
+//         rect(0,0,960,500);
+//       }
+//     }
+//     }else{
+//       fill(daysky);
+//       rect(0,0,960,500);
+//     }
+// }
   // for(let i=0; i<width; i = i += myStrokeWeight){
   //   let lerpMAP = map(i, 0, width, 0, obj.seconds/59*5);
   //   let sunriselerp = lerpColor(risesky,daysky,lerpMAP)
