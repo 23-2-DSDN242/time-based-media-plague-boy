@@ -119,5 +119,13 @@ let clockcurve = 20; //Curve of the clock
   fill(255)
   textAlign(CENTER, CENTER);
   text(obj.seconds, clockx+783, clocky+53);
+
+//Silly little plane, doing silly little plane things
+push();
+fill(0);
+translate(width/2,height/2)
+rotate(PI/3.0);
+rect(-26, -26, 50, 60, 60,60,0,0);
+pop();
 }
 
