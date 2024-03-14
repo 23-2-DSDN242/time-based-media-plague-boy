@@ -20,60 +20,60 @@ function draw_clock(obj) {
   
 
 //sky
-// let myStrokeWeight = 50;
-// strokeWeight(myStrokeWeight);
-// if (obj.hours < 18 && obj.minutes<30){
-//   if (obj.hours < 6){ //Nightsky
-//     fill(nightsky);
-//       rect(0,0,960,500);
-//   } else {
-//   if (obj.hours < 6 && obj.minutes<15){ // Nightsky - Sunrise
-//     for(let i=0; i<width; i = i += myStrokeWeight){
-//       let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
-//       let twilightlerp = lerpColor(nightky,risesky,lerpMAP)
-//       stroke(twilightlerp)
-//       line(i,0,i,height);
-//     }
-//   } else{
-//     if(obj.hours < 6 && obj.minutes<45){ // Sunrise - Daysky
-//       for(let i=0; i<width; i = i += myStrokeWeight){
-//           let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
-//           let sunriselerp = lerpColor(risesky,daysky,lerpMAP);
-//           stroke(sunriselerp);
-//           line(i,0,i,height);
-//       } 
-//   } else{//Daysky
-//     fill(daysky);
-//     rect(0,0,960,500);
-//     }
-//   } 
-//   }
-// } else{
-//     if(obj.hours > 17){
-//   if(obj.hours < 19){ // Daysky-Sunset
-//     for(let i=0; i<width; i = i += myStrokeWeight){
-//       let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
-//       let sundownlerp = lerpColor(daysky,setsky,lerpMAP);
-//       stroke(sundownlerp);
-//       line(i,0,i,height);
-//       }
-//     } else {
-//       if(obj.hours < 19 && obj.minutes < 30){; //Sunset-Nightsky
-//         let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
-//         let sunsetlerp = lerpColor(setsky,nightsky,lerpMAP);
-//         stroke(sunsetlerp);
-//         line(i,0,i,height);
+let myStrokeWeight = 50;
+strokeWeight(myStrokeWeight);
+if (obj.hours < 18 && obj.minutes<30){
+  if (obj.hours < 6){ //Nightsky
+    fill(nightsky);
+      rect(0,0,960,500);
+  } else {
+  if (obj.hours < 6 && obj.minutes<15){ // Nightsky - Sunrise
+    for(let i=0; i<width; i = i += myStrokeWeight){
+      let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+      let twilightlerp = lerpColor(nightky,risesky,lerpMAP)
+      stroke(twilightlerp)
+      line(i,0,i,height);
+    }
+  } else{
+    if(obj.hours < 6 && obj.minutes<45){ // Sunrise - Daysky
+      for(let i=0; i<width; i = i += myStrokeWeight){
+          let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+          let sunriselerp = lerpColor(risesky,daysky,lerpMAP);
+          stroke(sunriselerp);
+          line(i,0,i,height);
+      } 
+  } else{//Daysky
+    fill(daysky);
+    rect(0,0,960,500);
+    }
+  } 
+  }
+} else{
+    if(obj.hours > 17){
+  if(obj.hours < 19){ // Daysky-Sunset
+    for(let i=0; i<width; i = i += myStrokeWeight){
+      let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+      let sundownlerp = lerpColor(daysky,setsky,lerpMAP);
+      stroke(sundownlerp);
+      line(i,0,i,height);
+      }
+    } else {
+      if(obj.hours < 19 && obj.minutes < 30){; //Sunset-Nightsky
+        let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+        let sunsetlerp = lerpColor(setsky,nightsky,lerpMAP);
+        stroke(sunsetlerp);
+        line(i,0,i,height);
 
-//       } else { //Night Time
-//         fill(nightsky);
-//         rect(0,0,960,500);
-//       }
-//     }
-//     }else{
-//       fill(daysky);
-//       rect(0,0,960,500);
-//     }
-// }
+      } else { //Night Time
+        fill(nightsky);
+        rect(0,0,960,500);
+      }
+    }
+    }else{
+      fill(daysky);
+      rect(0,0,960,500);
+    }
+}
   // for(let i=0; i<width; i = i += myStrokeWeight){
   //   let lerpMAP = map(i, 0, width, 0, obj.seconds/59*5);
   //   let sunriselerp = lerpColor(risesky,daysky,lerpMAP)
@@ -121,11 +121,29 @@ let clockcurve = 20; //Curve of the clock
   text(obj.seconds, clockx+783, clocky+53);
 
 //Silly little plane, doing silly little plane things
+let planex = obj.hours*85
+let planey = 300
 push();
-fill(0);
-translate(width/2,height/2)
-rotate(PI/3.0);
-rect(-26, -26, 50, 60, 60,60,0,0);
+  //Plane Body
+    fill(0);
+    rect(planex-610, planey, 150, 40, 60,60,20,20);
+ //Plane tail
+    rect(planex-610, planey-20, 25, 50, 60,60,20,20);
+  //Plane Wing, Left
+  beginShape();
+    vertex(planex-510,planey);
+    vertex(planex-560, planey-50);
+    vertex(planex-595, planey-40);
+    vertex(planex-560, planey);
+  endShape();
+  //Plane Wing, Right 
+  beginShape();
+    vertex(planex-540,planey+20);
+    vertex(planex-580,planey+70);
+    vertex(planex-545,planey+80);
+    vertex(planex-500,planey+40);
+  endShape();
 pop();
+
 }
 

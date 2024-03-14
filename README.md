@@ -9,4 +9,5 @@ I decided to spend today trying to get the lerp colour gradient to work in conju
 
 14/03/2024
 Today I worked further on the gradient, I also added in the sqaures for the number to sit on.
-This time with the gradient I worked on getting it to change with the hour, and accross the screen using what was taught in class
+This time with the gradient I worked on getting it to change with the hour, and accross the screen using what was taught in class.
+I added in a little plane, that flys accross the screen from 6am-6pm, on the hour it moves one step.
