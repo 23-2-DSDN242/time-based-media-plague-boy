@@ -11,3 +11,9 @@ I decided to spend today trying to get the lerp colour gradient to work in conju
 Today I worked further on the gradient, I also added in the sqaures for the number to sit on.
 This time with the gradient I worked on getting it to change with the hour, and accross the screen using what was taught in class.
 I added in a little plane, that flys accross the screen from 6am-6pm, on the hour it moves one step.
+
+15/03/2024
+Today I worked on little clouds that move with the seconds, I haven't figured out how to get them to cleanly loop as the minute ends.
+
+16/03/2024
+Today I fixed up the clouds and made sure the loop completed, I'll later work on the Madea clock.
