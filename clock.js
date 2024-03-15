@@ -116,6 +116,7 @@ push();
     ellipse(cloudX+930, cloudY+150, 150, 130);//Sixth Cloud
     ellipse(cloudX+850, cloudY+160, 120, 100);
     ellipse(cloudX+1000, cloudY+180, 80, 60);
+
   ellipse(cloudX+1062, cloudY, 100, 80); //First Cloud loop
   ellipse(cloudX+1112, cloudY+10, 80, 60);
   ellipse(cloudX+1012, cloudY+15, 60, 40);
@@ -128,7 +129,6 @@ push();
   ellipse(cloudX+1612, cloudY+80, 100, 80);//Fourth Cloud loop
     ellipse(cloudX+1572, cloudY+90, 80, 60);
     ellipse(cloudX+1662, cloudY+95, 70, 50);
-
   ellipse(cloudX+1862, cloudY-60, 90, 70);//Fifth Cloud loop
   ellipse(cloudX+1902, cloudY-50, 70, 50);
   ellipse(cloudX+1822, cloudY-40, 50, 30);
