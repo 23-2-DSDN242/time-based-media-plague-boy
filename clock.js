@@ -81,6 +81,32 @@ if (obj.hours < 18 && obj.minutes<30){
   //   line(i,0,i,height);
   // }
 
+//Clouds
+let cloudX = -obj.seconds*18;
+let cloudY = 250;
+push();
+  fill(255);
+  ellipse(cloudX, cloudY, 100, 80); //First Cloud
+  ellipse(cloudX+50, cloudY+10, 80, 60);
+  ellipse(cloudX-50, cloudY+15, 60, 40);
+    ellipse(cloudX+200, cloudY+200, 70, 40);//Second Cloud
+    ellipse(cloudX+230, cloudY+205, 50, 30);
+    ellipse(cloudX+170, cloudY+210, 40, 20);
+  ellipse(cloudX+400, cloudY-140, 170, 140); //Third Cloud
+  ellipse(cloudX+320, cloudY-115, 100, 80);
+  ellipse(cloudX+480, cloudY-120, 130, 90);
+    ellipse(cloudX+550, cloudY+80, 100, 80);//Fourth Cloud
+    ellipse(cloudX+510, cloudY+90, 80, 60);
+    ellipse(cloudX+600, cloudY+95, 70, 50);
+  ellipse(cloudX+800, cloudY-60, 90, 70);//Fifth Cloud
+  ellipse(cloudX+840, cloudY-50, 70, 50);
+  ellipse(cloudX+760, cloudY-40, 50, 30);
+    ellipse(cloudX+930, cloudY+150, 150, 130);
+    ellipse(cloudX+850, cloudY+160, 120, 100);
+    ellipse(cloudX+1000, cloudY+180, 80, 60);
+pop();
+
+
 //clocks
 let clockx = 40; //X cord for the clock
 let clocky = 40; //Y cord for the clock
