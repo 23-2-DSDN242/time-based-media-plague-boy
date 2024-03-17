@@ -22,58 +22,112 @@ function draw_clock(obj) {
 //sky
 let myStrokeWeight = 50;
 strokeWeight(myStrokeWeight);
-if (obj.hours < 18 && obj.minutes<30){
-  if (obj.hours < 6){ //Nightsky
-    fill(nightsky);
-      rect(0,0,960,500);
-  } else {
-  if (obj.hours < 6 && obj.minutes<15){ // Nightsky - Sunrise
-    for(let i=0; i<width; i = i += myStrokeWeight){
-      let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
-      let twilightlerp = lerpColor(nightky,risesky,lerpMAP)
-      stroke(twilightlerp)
-      line(i,0,i,height);
-    }
-  } else{
-    if(obj.hours < 6 && obj.minutes<45){ // Sunrise - Daysky
-      for(let i=0; i<width; i = i += myStrokeWeight){
-          let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
-          let sunriselerp = lerpColor(risesky,daysky,lerpMAP);
-          stroke(sunriselerp);
-          line(i,0,i,height);
-      } 
-  } else{//Daysky
-    fill(daysky);
-    rect(0,0,960,500);
-    }
-  } 
-  }
-} else{
-    if(obj.hours > 17){
-  if(obj.hours < 19){ // Daysky-Sunset
-    for(let i=0; i<width; i = i += myStrokeWeight){
-      let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
-      let sundownlerp = lerpColor(daysky,setsky,lerpMAP);
-      stroke(sundownlerp);
-      line(i,0,i,height);
-      }
-    } else {
-      if(obj.hours < 19 && obj.minutes < 30){; //Sunset-Nightsky
-        let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
-        let sunsetlerp = lerpColor(setsky,nightsky,lerpMAP);
-        stroke(sunsetlerp);
-        line(i,0,i,height);
 
-      } else { //Night Time
-        fill(nightsky);
-        rect(0,0,960,500);
-      }
-    }
-    }else{
-      fill(daysky);
-      rect(0,0,960,500);
+
+if(obj.hours >= 19 || obj.hours < 6){
+  fill(nightsky);
+  rect(0,0,960,500);
+
+}else{
+  fill(daysky);
+  rect(0,0,960,500);
+}
+
+if (obj.hours == 6 && obj.minutes <30 ) { // night to rise
+  fill(nightsky);
+  rect(0,0,960,500);
+// fill(255,0,0)
+//   ellipse(100,100, 100)
+  let AmmountAccross = map(obj.minutes, 0, 30, 0, width) 
+  for(let i=0; i<AmmountAccross; i = i += myStrokeWeight){
+    let lerpMAP = map(AmmountAccross, 0, width, 0, 1);
+    let twilightlerp = lerpColor(nightsky,risesky,lerpMAP)
+    stroke(twilightlerp)
+    line(i,0,i,height);
+  }
+}
+
+if (obj.hours == 6 && obj.minutes >= 30 ) { // rise to day 
+
+  for(let i=0; i<width; i = i += myStrokeWeight){
+    let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+    let sunriselerp = lerpColor(risesky,daysky,lerpMAP);
+    stroke(sunriselerp);
+    line(i,0,i,height);
+}
+}
+
+if(obj.hours == 18 && obj.minutes <30 ){
+  for(let i=0; i<width; i = i += myStrokeWeight){ // aa  bit broken 
+    let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+    let sundownlerp = lerpColor(daysky,setsky,lerpMAP);
+    stroke(sundownlerp);
+    line(i,0,i,height);
     }
 }
+
+if(obj.hours == 18 && obj.minutes >= 30 ){ /// just purple 
+  fill(setsky)
+  rect(0,0,960,500);
+}
+
+
+// if (obj.hours < 18 && obj.minutes<30){ // less than 6:30 pm -go go morning
+//   if (obj.hours < 6){ //Nightsky
+//     fill(nightsky);
+//       rect(0,0,960,500);
+//   } else {
+//   if (obj.hours < 6 && obj.minutes<15){ // Nightsky - Sunrise
+//     for(let i=0; i<width; i = i += myStrokeWeight){
+//       let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+//       let twilightlerp = lerpColor(nightky,risesky,lerpMAP)
+//       stroke(twilightlerp)
+//       line(i,0,i,height);
+//     }
+//   } else{
+//     if(obj.hours < 6 && obj.minutes<45){ // Sunrise - Daysky
+//       for(let i=0; i<width; i = i += myStrokeWeight){
+//           let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+//           let sunriselerp = lerpColor(risesky,daysky,lerpMAP);
+//           stroke(sunriselerp);
+//           line(i,0,i,height);
+//       } 
+//   } else{//Daysky
+//     fill(daysky);
+//     rect(0,0,960,500);
+//     }
+//   } 
+//   }
+// } // end of go go morning  
+
+
+
+// else{
+//     if(obj.hours > 17){ 
+//   if(obj.hours < 19){ // Daysky-Sunset
+//     for(let i=0; i<width; i = i += myStrokeWeight){
+//       let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+//       let sundownlerp = lerpColor(daysky,setsky,lerpMAP);
+//       stroke(sundownlerp);
+//       line(i,0,i,height);
+//       }
+//     } else {
+//       if(obj.hours < 19 && obj.minutes < 30){; //Sunset-Nightsky
+//         let lerpMAP = map(i, 0, width, 0, obj.hours/24*59);
+//         let sunsetlerp = lerpColor(setsky,nightsky,lerpMAP);
+//         stroke(sunsetlerp);
+//         line(i,0,i,height);
+
+//       } else { //Night Time
+//         fill(nightsky);
+//         rect(0,0,960,500);
+//       }
+//     }
+//     }else{
+//       fill(daysky);
+//       rect(0,0,960,500);
+//     }
+// }
   // for(let i=0; i<width; i = i += myStrokeWeight){
   //   let lerpMAP = map(i, 0, width, 0, obj.seconds/59*5);
   //   let sunriselerp = lerpColor(risesky,daysky,lerpMAP)
@@ -97,6 +151,7 @@ let cloudX = -obj.seconds*18;
 //-216
 let cloudY = 250;
 push();
+  noStroke()
   fill(255);
   ellipse(cloudX, cloudY, 100, 80); //First Cloud
   ellipse(cloudX+50, cloudY+10, 80, 60);
@@ -131,7 +186,7 @@ push();
     ellipse(cloudX+1662, cloudY+95, 70, 50);
   ellipse(cloudX+1862, cloudY-60, 90, 70);//Fifth Cloud loop
   ellipse(cloudX+1902, cloudY-50, 70, 50);
-  ellipse(cloudX+1822, cloudY-40, 50, 30);
+  ellipse(cloudX+182+2, cloudY-40, 50, 30);
     ellipse(cloudX+1992, cloudY+150, 150, 130);//Sixth Cloud loop
     ellipse(cloudX+1912, cloudY+160, 120, 100);
     ellipse(cloudX+2062, cloudY+180, 80, 60);
