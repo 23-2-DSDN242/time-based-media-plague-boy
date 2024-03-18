@@ -19,7 +19,13 @@ function draw_clock(obj) {
   let nightsky = color (1, 8, 64);
   
 
-//sky
+//Sky
+//Between 7pm(19:00) and 6am(6:00) Sky is Night
+//Between 6am(6:00) and 6.30am (6:30) Sky is Twilight
+//Between 6.30am(6:30) and 7am(7:00) Sky is Sunrise
+//Between 7am(7:00) and 6pm(18:00) Sky is Daylight
+//Between 6pm(18:00) and 6.30pm(18:30) Sky is Pre-Sunset
+//Between 6.30pm(18:30) and 7pm (19:00) Sky is Sunset
 let myStrokeWeight = 50;
 strokeWeight(myStrokeWeight);
 let AmmountAccross = map(obj.minutes, 0, 30, 0, width)
@@ -88,7 +94,7 @@ let cloudX = -secondsCloudSmooth;
 let cloudY = 250;
 
 push();
-  noStroke()
+  noStroke();
   fill(255);
   ellipse(cloudX+20, cloudY, 100, 80); //First Cloud
   ellipse(cloudX+70, cloudY+10, 80, 60);

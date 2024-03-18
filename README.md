@@ -17,3 +17,21 @@ Today I worked on little clouds that move with the seconds, I haven't figured ou
 
 16/03/2024
 Today I fixed up the clouds and made sure the loop completed, I'll later work on the Madea clock.
+
+17/03/2024
+I opened the code, looked at it, tried something with the gradient and then gave up.
+Madea clock not started.
+
+18/03/2024
+I did not work on the Madea clock.
+Today met with Pheobe who fixed issues with gradients and showed how to make code smoooooooth.
+Worked on cloud smoooooothness, and plane smoooooothness. 
+Then worked further on gradient, which Sunrise, and Sunset broke, but both Twilight, and PreSet, work fine. Tried to fix this with changes to background colour, which did not help, changes to the if statement that runs this, did not help, running the code through chat gpt, did not help, and double checking the if variables are valid by running through different background colours, they are.
+
+Left to do
+- Alarm (Swarm of Birds take over the screen for 10 seconds, time left is diplayed on new flippy clock)
+- Madea
+- Gradient
+
+Optionial Additions to do
+- Make Clocks Flip
