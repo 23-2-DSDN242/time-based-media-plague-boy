@@ -199,7 +199,6 @@ DisplayDigits(stringyMin[0], stringyMin[1],clockx + 393)
   let stringySec = obj.seconds.toString()
   DisplayDigits(stringySec[0], stringySec[1],clockx + 736)
    }
-  // text(obj.seconds, clockx+783, clocky+53);
 
 //Silly little plane, doing silly little plane things
 let hoursWithFractionPl   = hours*80 + (minutes);
