@@ -11,7 +11,7 @@ function draw_clock(obj) {
   let secondsWithFraction2   = seconds*7 + (millis / 10.0);
   let secondsSmooth2  = map(secondsWithFraction2, 0, 300, 0, 300);
   if (obj.millis > 500){
-    push()
+  push()
     textSize(secondsSmooth);
     textAlign(CENTER, CENTER);
     text(obj.hours, 250, height/2);

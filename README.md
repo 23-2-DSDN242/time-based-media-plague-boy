@@ -35,3 +35,9 @@ Left to do
 
 Optionial Additions to do
 - Make Clocks Flip
+
+20/03/2024
+Today I worked on the Madea clock, based off of Clock 8, I struggled to get the clock to tick back into it's starting positon because I used seconds.
+
+21/03/2024
+Today in studio Pheobe helped me fix the gradient issue, which was in the original mapping. I then made my alarm, scrapping the original idea of birds after having issues of animating due to the functions, instead swapping for the plane exploding in the sky and the background turns into a red gradient, whilst the timer is ticking down the clouds and plane jump up and down.
