@@ -13,33 +13,36 @@ function draw_clock(obj) {
   //        > 0 --> the number of seconds until alarm should go off
   background(1000); //  beige
   // fill(200); // dark grey
-  let risesky = color(255, 141, 68);
-  let daysky = color(89, 185, 255);
-  let setsky = color(60, 3, 87);
-  let nightsky = color (1, 8, 64);
-  
-
+  let hours = obj.hours;
+  let minutes = obj.minutes;
+  let seconds = obj.seconds;
+  let millis = obj.millis;
 //Sky
 //Between 7pm(19:00) and 6am(6:00) Sky is Night
-//Between 6am(6:00) and 6.30am (6:30) Sky is Twilight
-//Between 6.30am(6:30) and 7am(7:00) Sky is Sunrise
-//Between 7am(7:00) and 6pm(18:00) Sky is Daylight
-//Between 6pm(18:00) and 6.30pm(18:30) Sky is Pre-Sunset
-//Between 6.30pm(18:30) and 7pm (19:00) Sky is Sunset
+//Between 6am(6:00) and 6.30am (6:30) Sky is Twilight - NightSky to RiseSky
+//Between 6.30am(6:30) and 7am(7:00) Sky is Sunrise - Risesky to Daysky
+//Between 7am(7:00) and 6pm(18:00) Sky is Daylight 
+//Between 6pm(18:00) and 6.30pm(18:30) Sky is Pre-Sunset - Daysky to Setsky
+//Between 6.30pm(18:30) and 7pm (19:00) Sky is Sunset - Setsky to Nightsky
+let risesky = color(255, 141, 68); //Orange
+let daysky = color(89, 185, 255); //Light Blue
+let setsky = color(60, 3, 87); //Purple 
+let nightsky = color (1, 8, 64); //Navy
+
 let myStrokeWeight = 50;
 strokeWeight(myStrokeWeight);
-let AmmountAccross = map(obj.minutes, 0, 29, 0, width)
-let AmmountAccross2 = map(obj.minutes, 30, 60, 0, width)
-if(obj.hours >= 19 || obj.hours < 6){
-  fill(nightsky);
-  rect(0,0,960,500);
+let AmmountAccross = map(obj.minutes, 0, 29, 0, width) //For First half of the hour transitions
+let AmmountAccross2 = map(obj.minutes, 30, 60, 0, width) //For Second half of the hour transitions
 
+if(obj.hours >= 19 || obj.hours < 6){ //Default Skies
+  fill(nightsky); //Between 7pm(19:00) and 6am(6:00) Sky is Night
+  rect(0,0,960,500);
 }else{
-  fill(daysky);
+  fill(daysky); //Between 7am(7:00) and 6pm(18:00) Sky is Daylight
   rect(0,0,960,500);
 }
 
-if (obj.hours == 6 && obj.minutes <30 ) { // night to rise
+if (obj.hours == 6 && obj.minutes <30 ) { //Between 6am(6:00) and 6.30am (6:30) Sky is Twilight - NightSky to RiseSky
   fill(nightsky);
   rect(0,0,960,500);
   for(let i=0; i<AmmountAccross; i = i += myStrokeWeight){
@@ -50,7 +53,7 @@ if (obj.hours == 6 && obj.minutes <30 ) { // night to rise
   }
 }
 
-if (obj.hours == 6 && obj.minutes >= 30 ) { // rise to day 
+if (obj.hours == 6 && obj.minutes >= 30 ) { //Between 6.30am(6:30) and 7am(7:00) Sky is Sunrise - Risesky to Daysky
   fill(risesky);
   rect(0,0,960,500); 
   for(let i=0; i<AmmountAccross2; i = i += myStrokeWeight){
@@ -61,7 +64,7 @@ if (obj.hours == 6 && obj.minutes >= 30 ) { // rise to day
   }
 }
 
-if(obj.hours == 18 && obj.minutes <31 ){ //Day to Sunset
+if(obj.hours == 18 && obj.minutes <31 ){ //Between 6pm(18:00) and 6.30pm(18:30) Sky is Pre-Sunset - Daysky to Setsky
   for(let i=0; i<AmmountAccross; i = i += myStrokeWeight){
     let lerpMAP = map(AmmountAccross, 0, width, 0, 1);
     let setstartlerp = lerpColor(daysky,setsky,lerpMAP)
@@ -70,7 +73,7 @@ if(obj.hours == 18 && obj.minutes <31 ){ //Day to Sunset
 }
 }
 
-if(obj.hours == 18 && obj.minutes >= 30 ){ // Sunset to Night
+if(obj.hours == 18 && obj.minutes >= 30 ){ //Between 6.30pm(18:30) and 7pm (19:00) Sky is Sunset - Setsky to Nightsky
   fill(setsky);
   rect(0,0,960,500); 
   for(let i=0; i<AmmountAccross2; i = i += myStrokeWeight){
@@ -82,22 +85,21 @@ if(obj.hours == 18 && obj.minutes >= 30 ){ // Sunset to Night
 }
 
 
-//Clouds
-let hours = obj.hours;
-let minutes = obj.minutes;
-let seconds = obj.seconds;
-let millis = obj.millis;
+//Clouds, Plane & Alarm
 
 let secondsWithFraction   = seconds + (millis / 1000.0);
 let secondsCloudSmooth  = map(secondsWithFraction, 0, 59, 0, width);
 
 let cloudX = -secondsCloudSmooth; // X co-ordinate for the clouds that changes with seconds
 let cloudY = 250; //Y Co-ordinate for the clouds
-//Alarm Function, Clouds Hop
+let cloudcolour = color(255) //'Normal' cloud colour
+let cloudcolourD = color(59, 33, 33); //Gray-Red Clouds for 'DoomsDay'
 if (obj.seconds_until_alarm < 0 || obj.seconds_until_alarm == undefined){ //No Alarm is set Behaviour
-  push(); //Normal Cloud Behaviour and Plane
+  //Normal Cloud Behaviour and Plane
+  //Clouds
+  push(); 
   noStroke();
-  fill(255);
+  fill(cloudcolour);
   ellipse(cloudX+20, cloudY, 100, 80); //First Cloud
   ellipse(cloudX+70, cloudY+10, 80, 60);
   ellipse(cloudX-30, cloudY+15, 60, 40);
@@ -144,13 +146,12 @@ if (obj.seconds_until_alarm < 0 || obj.seconds_until_alarm == undefined){ //No A
   ellipse(cloudX-124, cloudY+160, 120, 100);
   ellipse(cloudX+26, cloudY+180, 80, 60);
 pop();
-//Silly little plane, doing silly little plane things
+//Plane
 let hoursWithFractionPl   = hours*80 + (minutes);
 let hoursPlaneSmooth  = map(hoursWithFractionPl, 0, 960, 0, width);
 
 let planex = hoursPlaneSmooth - 620
 let planey = 300
-
 push();
   //Plane Body
     fill(0);
@@ -173,12 +174,13 @@ push();
     vertex(planex+110,planey+40);
   endShape();
 pop();
-} else if (obj.seconds_until_alarm > 0) {
-  if(obj.millis < 999/2){
-    let cloudY = 225
-    push();
+
+} else if (obj.seconds_until_alarm > 0) { //Alarm is ticking down.
+  if(obj.millis < 999/2){ //Cloud Hopping Function
+    let cloudY = 225 //Cloud Down 
+push();
   noStroke();
-  fill(255);
+  fill(cloudcolour);
   ellipse(cloudX+20, cloudY, 100, 80); //First Cloud
   ellipse(cloudX+70, cloudY+10, 80, 60);
   ellipse(cloudX-30, cloudY+15, 60, 40);
@@ -225,13 +227,12 @@ pop();
   ellipse(cloudX-124, cloudY+160, 120, 100);
   ellipse(cloudX+26, cloudY+180, 80, 60);
 pop();
-//Silly little plane, doing silly little plane things
+//Plane, Normal
 let hoursWithFractionPl   = hours*80 + (minutes);
 let hoursPlaneSmooth  = map(hoursWithFractionPl, 0, 960, 0, width);
 
 let planex = hoursPlaneSmooth - 620
-let planey = 250
-
+let planey = 300
 push();
   //Plane Body
     fill(0);
@@ -256,10 +257,11 @@ push();
 pop();
     }
     else{
-     let cloudY = 250
+      //Cloud Goes up a Little
+  let cloudY = 250
   push();
   noStroke();
-  fill(255);
+  fill(cloudcolour);
   ellipse(cloudX+20, cloudY, 100, 80); //First Cloud
   ellipse(cloudX+70, cloudY+10, 80, 60);
   ellipse(cloudX-30, cloudY+15, 60, 40);
@@ -306,13 +308,12 @@ pop();
   ellipse(cloudX-124, cloudY+160, 120, 100);
   ellipse(cloudX+26, cloudY+180, 80, 60);
 pop();
-//Silly little plane, doing silly little plane things
+//Plane, Normal
 let hoursWithFractionPl   = hours*80 + (minutes);
 let hoursPlaneSmooth  = map(hoursWithFractionPl, 0, 960, 0, width);
 
 let planex = hoursPlaneSmooth - 620
-let planey = 350
-
+let planey = 300
 push();
   //Plane Body
     fill(0);
@@ -336,8 +337,8 @@ push();
   endShape();
 pop();
     }
-} else {
-  let LiteRed = color(255, 0, 0);
+} else { // Alarm is going off
+let LiteRed = color(255, 0, 0); //Sky colour changes to red gradient effect
 let DarkRed = color(125, 0, 0);
 for(let i=0; i<=height; i += myStrokeWeight){
   let lerpMAP = map(i, 0, height, 0, 1);
@@ -347,7 +348,7 @@ for(let i=0; i<=height; i += myStrokeWeight){
 }
   push(); //Normal Cloud Behaviour
   noStroke();
-  fill(255);
+  fill(cloudcolourD);
   ellipse(cloudX+20, cloudY, 100, 80); //First Cloud
   ellipse(cloudX+70, cloudY+10, 80, 60);
   ellipse(cloudX-30, cloudY+15, 60, 40);
@@ -394,12 +395,11 @@ for(let i=0; i<=height; i += myStrokeWeight){
   ellipse(cloudX-124, cloudY+160, 120, 100);
   ellipse(cloudX+26, cloudY+180, 80, 60);
 pop();
-//Silly little plane, FALLING
+//Silly little plane, Exploding
 let hoursWithFractionPl   = hours*80 + (minutes);
 let hoursPlaneSmooth  = map(hoursWithFractionPl, 0, 960, 0, width);
 let planex = hoursPlaneSmooth - 620
 let planey = 300;
-
 
 push();
   //Plane Body
@@ -423,7 +423,6 @@ push();
     vertex(planex+110,planey+40);
   endShape();
 pop();
-
 if(obj.millis < 999/2){ //Explosion Cloud
   let explosion = 100
   fill(156, 156, 156);
@@ -439,15 +438,15 @@ if(obj.millis < 999/2){ //Explosion Cloud
   ellipse(planex,planey+20,explosion-50,explosion-50)
   ellipse(planex+110,planey+30,explosion-30,explosion-30)
 }
-
 }
 
-//clocks
+//Clocks
 let clockx = 40; //X cord for the clock
 let clocky = 40; //Y cord for the clock
 let clockw = 90; //Width of the clock
 let clockh = 100; //Height of the clock
 let clockcurve = 20; //Curve of the clock
+
 //Hour
   noStroke()
   fill(0);
@@ -457,14 +456,13 @@ let clockcurve = 20; //Curve of the clock
   textSize(70);
   fill(255)
   textAlign(CENTER, CENTER);
-  if (obj.hours < 10){
+  if (obj.hours < 10){ //Displays the digits with a 0 in the front if number is in single digits
     DisplayDigits('0', obj.hours.toString(),clockx + 45 )
    }else{
   let stringyHour = obj.hours.toString()
   DisplayDigits(stringyHour[0], stringyHour[1],clockx + 45)
    }
   
-
 //Minutes
   noStroke();
   fill(0);
@@ -474,13 +472,12 @@ let clockcurve = 20; //Curve of the clock
   textSize(70);
   fill(255)
   textAlign(CENTER, CENTER);
- if (obj.minutes < 10){
-  DisplayDigits('0', obj.minutes.toString(),clockx + 393 )
+ if (obj.minutes < 10){ //Displays the digits with a 0 in the front if number is in single digits
+  DisplayDigits('0', obj.minutes.toString(),clockx + 393 ) 
  }else{
 let stringyMin = obj.minutes.toString()
 DisplayDigits(stringyMin[0], stringyMin[1],clockx + 393)
  }
-
 
 //Seconds
   noStroke()
@@ -491,21 +488,16 @@ DisplayDigits(stringyMin[0], stringyMin[1],clockx + 393)
   textSize(70);
   fill(255)
   textAlign(CENTER, CENTER);
-  if (obj.seconds < 10){
+  if (obj.seconds < 10){ //Displays the digits with a 0 in the front if number is in single digits
     DisplayDigits('0', obj.seconds.toString(),clockx + 736 )
    }else{
   let stringySec = obj.seconds.toString()
   DisplayDigits(stringySec[0], stringySec[1],clockx + 736)
    }
-
-
-
-
-
 }
 
 
-function DisplayDigits (firstD, secondD, Xval){
+function DisplayDigits (firstD, secondD, Xval){ //PHEOBE HELPED
   strokeWeight(1)
   textSize(70);
   fill(255)
