@@ -42,3 +42,7 @@ Today I worked on the Madea clock, based off of Clock 8, I struggled to get the 
 21/03/2024
 Today in studio Pheobe helped me fix the gradient issue, which was in the original mapping. I then made my alarm, scrapping the original idea of birds after having issues of animating due to the functions, instead swapping for the plane exploding in the sky and the background turns into a red gradient, whilst the timer is ticking down the clouds jump up and down.
 The only downside of this new design is that if the plane is off the screen there is not effect aside from the colour of the sky changing.
+
+Reflection
+If I had more time I'd make the animations more smooth in the alarm section, as well as adding more gradients to other elements. I would also add in the clock flipping element I had originally wanted.
+All in all, for a 2 week project, and the first project back I am proud of what I was able to achieve.
